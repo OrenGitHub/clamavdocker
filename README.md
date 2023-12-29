@@ -8,7 +8,7 @@ Minimalistic docker image for [clamav][1]
 $ docker build --tag host --file Dockerfile .
 $ docker run -d -t --name clamav host
 $ docker cp clamav:/clamav-1.2.1/build/clamdtop/clamdtop.asm .
-$ grep -rn "strchr(" clamdtop.asm
+$ grep -rn "strchr(" clamdtop.asm # on windows see below
 # expected results ...
 clamdtop.asm:13357:        p1 = strchr(dupip, ']');
 clamdtop.asm:13398:    while ((p1 = strchr(p1, ':'))) {
@@ -24,5 +24,9 @@ clamdtop.asm:16542:        p = strchr(pstart, '/');
 clamdtop.asm:16750:        char *val = strchr(buf, ':');
 clamdtop.asm:21393:            } else if (!ret || strchr(shortopts, ret)) {
 ```
+
+---
+<sup>1</sup> on windows: `Select-String -Pattern 'strchr\(' .\clamdtop.asm`
+
 
 [1]: https://github.com/Cisco-Talos/clamav
